@@ -20,7 +20,7 @@ public class EnergySystem : MonoBehaviour
 
     void Start()
     {
-        // UpdateEnergyValue();
+        UpdateEnergyValue();
         UpdateEnergyText();
         restButton.onClick.AddListener(Rest);
         minusButton.onClick.AddListener(DecreaseEnergy);
@@ -48,7 +48,6 @@ public class EnergySystem : MonoBehaviour
         }
 
         energy = Math.Clamp(energy + energyGain, minEnergy, maxEnergy);
-        energyValue.value = energy;
         UpdateEnergyText();
         UpdateEnergyValue();
     }
@@ -63,12 +62,26 @@ public class EnergySystem : MonoBehaviour
 
     public void UpdateEnergyValue()
     {   
-        energyValue.value = energy;
-        Debug.Log($"Energy value slider updated to: {energyValue.value}");
+        if (energyValue != null)
+        {
+            energyValue.value = energy;
+            Debug.Log($"Energy value slider updated to: {energyValue.value}");
+        }
+        else
+        {
+            Debug.LogWarning("EnergyValue slider is not assigned!");
+        }
     }
     public void UpdateEnergyText()
     {
-        energyText.text = $"Energy: {energy}";
-        Debug.Log($"Energy updated. Current energy: {energy}");
+        if (energyText != null)
+        {
+            energyText.text = $"Energy: {energy}";
+            Debug.Log($"Energy updated. Current energy: {energy}");
+        }
+        else
+        {
+            Debug.LogWarning("EnergyText is not assigned!");
+        }
     }
 }

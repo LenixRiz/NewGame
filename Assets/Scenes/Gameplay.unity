@@ -1907,7 +1907,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1377318172}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -2142,8 +2142,10 @@ MonoBehaviour:
   energyText: {fileID: 778750549}
   restButton: {fileID: 548494064}
   minusButton: {fileID: 1977084316}
-  energy: 0
-  energyValue: {fileID: 0}
+  energy: 100
+  maxEnergy: 100
+  minEnergy: 0
+  energyValue: {fileID: 968172472}
 --- !u!114 &1019719703
 MonoBehaviour:
   m_ObjectHideFlags: 0
