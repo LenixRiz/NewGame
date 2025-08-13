@@ -7,19 +7,31 @@ public class EnergySystem : MonoBehaviour
 {
     //UI Elements
     public TextMeshProUGUI energyText;
+    public TextMeshProUGUI restConditionText;
     public Button restButton;
     public Button minusButton;
 
     [Range(0, 100)]
-    [SerializeField] float energy = 100F;
-    [SerializeField] float maxEnergy = 100F;
-    [SerializeField] float minEnergy = 0F;
+    [SerializeField] private float energy = 100F;
+    public float Energy
+    {
+        get => energy;
+        set
+        {
+            energy = Mathf.Clamp(value, minEnergy, maxEnergy);
+            UpdateEnergyValue();
+            UpdateEnergyText();
+        }
+    } // So the private field can be accessed by other classes
+    [SerializeField] private float maxEnergy = 100F;
+    [SerializeField] private float minEnergy = 0F;
 
     [SerializeField] Slider energyValue;
     private static readonly System.Random rng = new();
 
     void Start()
     {
+        Energy = energy; // Initialize Energy property
         UpdateEnergyValue();
         UpdateEnergyText();
         restButton.onClick.AddListener(Rest);
@@ -31,25 +43,34 @@ public class EnergySystem : MonoBehaviour
         int rngValue = rng.Next(100);
         float energyGain;
 
-        if (rngValue < 20)
+        if (energy != maxEnergy)
         {
-            energyGain = 30F;
-            Debug.Log("You are sleep deprived, you gain less energy (30).");
-        }
-        else if (rngValue < 80)
-        {
-            energyGain = 50F;
-            Debug.Log("You are refreshed, you gain energy (50).");
+            if (rngValue < 20)
+            {
+                energyGain = 30F;
+                restConditionText.text = "You are sleep deprived";
+                Debug.Log("You are sleep deprived, you gain less energy (30).");
+            }
+            else if (rngValue < 80)
+            {
+                energyGain = 50F;
+                restConditionText.text = "You are refreshed";
+                Debug.Log("You are refreshed, you gain energy (50).");
+            }
+            else
+            {
+                energyGain = 70F;
+                restConditionText.text = "You are well-rested";
+                Debug.Log("You are well-rested, you gain much energy (70).");
+            }
         }
         else
         {
-            energyGain = 70F;
-            Debug.Log("You are well-rested, you gain much energy (70).");
+            energyGain = 0F;
+            restConditionText.text = "You are fully energized";
+            Debug.Log("You are fully energized, no energy gained.");
         }
-
-        energy = Math.Clamp(energy + energyGain, minEnergy, maxEnergy);
-        UpdateEnergyText();
-        UpdateEnergyValue();
+        Energy += energyGain;
     }
 
     public void DecreaseEnergy()

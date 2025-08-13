@@ -1,10 +1,12 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInformation : MonoBehaviour
 {
 
-    public TrainingSystem trainingSystem;
+    [SerializeField] private TrainingSystem trainingSystem;
 
     // UI Elements
     public TextMeshProUGUI plrNameText;
@@ -13,17 +15,75 @@ public class PlayerInformation : MonoBehaviour
     public TextMeshProUGUI plrVitalityText;
     public TextMeshProUGUI plrDexterityText;
     public TextMeshProUGUI plrAgilityText;
-    public TextMeshProUGUI plrWitText;
+    public TextMeshProUGUI plrIntellectualText;
+    public TextMeshProUGUI plrSkillPointsText;
 
     // Player Info
     [SerializeField] string  plrName = "Player";
     [SerializeField] int plrHealth = 100;
     // Player Stats
-    readonly int plrStrength;
-    readonly int plrVitality;
-    readonly int plrDexterity;
-    readonly int playerAgility;
-    readonly int plrWit;
+    
+    [SerializeField] private int plrStrength = 10;
+    [SerializeField] private int plrVitality = 10;
+    [SerializeField] private int plrDexterity = 10;
+    [SerializeField] private int plrAgility = 10;
+    [SerializeField] private int plrIntellectual = 10;
+    [SerializeField] private int plrSkillPoints = 0;
+
+    public int Strength
+    {
+        get => plrStrength;
+        set
+        {
+            plrStrength = Math.Max(0, value); // Ensure strength is not negative
+            UpdatePlrStats();
+        }
+    }
+    public int Vitality
+    {
+        get => plrVitality;
+        set
+        {
+            plrVitality = Math.Max(0, value); // Ensure vitality is not negative
+            UpdatePlrStats();
+        }
+    }
+    public int Dexterity
+    {
+        get => plrDexterity;
+        set
+        {
+            plrDexterity = Math.Max(0, value); // Ensure dexterity is not negative
+            UpdatePlrStats();
+        }
+    }
+    public int Agility
+    {
+        get => plrAgility;
+        set
+        {
+            plrAgility = Math.Max(0, value); // Ensure agility is not negative
+            UpdatePlrStats();
+        }
+    }
+    public int Intellectual
+    {
+        get => plrIntellectual;
+        set
+        {
+            plrIntellectual = Math.Max(0, value); // Ensure intellectual is not negative
+            UpdatePlrStats();
+        }
+    }
+    public int SkillPoints
+    {
+        get => plrSkillPoints;
+        set
+        {
+            plrSkillPoints = Math.Max(0, value); // Ensure skill points are not negative
+            UpdatePlrStats();
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,10 +107,18 @@ public class PlayerInformation : MonoBehaviour
 
     public void UpdatePlrStats()
     {
-        plrStrengthText.text = $"Strength: {plrStrength}";
-        plrVitalityText.text = $"Vitality: {plrVitality}";
-        plrDexterityText.text = $"Dexterity: {plrDexterity}";
-        plrAgilityText.text = $"Agility: {playerAgility}";
-        plrWitText.text = $"Wit: {plrWit}";
+        if (trainingSystem != null)
+        {
+            plrStrengthText.text = $"Strength: {Strength}";
+            plrVitalityText.text = $"Vitality: {Vitality}";
+            plrDexterityText.text = $"Dexterity: {Dexterity}";
+            plrAgilityText.text = $"Agility: {Agility}";
+            plrIntellectualText.text = $"Wit: {Intellectual}";
+            plrSkillPointsText.text = $"Skill Points: {SkillPoints}";
+        }
+        else
+        {
+            Debug.LogWarning("TrainingSystem is not assigned. Player stats will not be updated.");
+        }
     }
 }
