@@ -2287,6 +2287,7 @@ GameObject:
   - component: {fileID: 1019719704}
   - component: {fileID: 1019719703}
   - component: {fileID: 1019719702}
+  - component: {fileID: 1019719705}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2426,6 +2427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energySystem: {fileID: 1019719703}
   playerInformation: {fileID: 1019719704}
+  turnTimeSystem: {fileID: 1019719705}
   StrengthTrainButton: {fileID: 1807519863}
   VitalityTrainButton: {fileID: 85417568}
   DexterityTrainButton: {fileID: 1292452286}
@@ -2444,6 +2446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2e44f3de305bc49a3de33a7534afc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnTimeSystem: {fileID: 1019719705}
   energyText: {fileID: 778750549}
   restConditionText: {fileID: 1995100836}
   restButton: {fileID: 548494064}
@@ -2481,6 +2484,20 @@ MonoBehaviour:
   plrAgility: 10
   plrIntellectual: 10
   plrSkillPoints: 0
+--- !u!114 &1019719705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019719697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2005f8f74d0ea934a890a05aab99376c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnTimeText: {fileID: 88678450}
+  playerAgeText: {fileID: 1246166650}
 --- !u!1 &1144033413
 GameObject:
   m_ObjectHideFlags: 0

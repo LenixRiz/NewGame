@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class EnergySystem : MonoBehaviour
 {
+
+    [SerializeField] private TurnTimeSystem turnTimeSystem;
+
     //UI Elements
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI restConditionText;
@@ -49,18 +52,21 @@ public class EnergySystem : MonoBehaviour
             {
                 energyGain = 30F;
                 restConditionText.text = "You are sleep deprived";
+                turnTimeSystem.TurnAdd();
                 Debug.Log("You are sleep deprived, you gain less energy (30).");
             }
             else if (rngValue < 80)
             {
                 energyGain = 50F;
                 restConditionText.text = "You are refreshed";
+                turnTimeSystem.TurnAdd();
                 Debug.Log("You are refreshed, you gain energy (50).");
             }
             else
             {
                 energyGain = 70F;
                 restConditionText.text = "You are well-rested";
+                turnTimeSystem.TurnAdd();
                 Debug.Log("You are well-rested, you gain much energy (70).");
             }
         }
@@ -98,7 +104,6 @@ public class EnergySystem : MonoBehaviour
         if (energyText != null)
         {
             energyText.text = $"Energy: {energy}";
-            Debug.Log($"Energy updated. Current energy: {energy}");
         }
         else
         {

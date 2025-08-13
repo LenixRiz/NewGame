@@ -8,10 +8,14 @@ public class TrainingSystem : MonoBehaviour
 
     [SerializeField] private EnergySystem energySystem;
     [SerializeField] private PlayerInformation playerInformation;
+    [SerializeField] private TurnTimeSystem turnTimeSystem;
 
     private static readonly System.Random rng = new();
-    private readonly int trainValue = rng.Next(2, 11);
-    private readonly int skillPointsGain = rng.Next(1, 4);
+
+    public int TrainValue{get; private set;}
+
+    public int SkillPointsGain{get; private set;}
+
 
     // UI Elements
     public Button StrengthTrainButton;
@@ -30,15 +34,23 @@ public class TrainingSystem : MonoBehaviour
         IntellectualTrainButton.onClick.AddListener(TrainIntellectual);
     }
 
+    private void RollRngValues()
+    {
+        TrainValue = rng.Next(1, 6);
+        SkillPointsGain = rng.Next(1, 4);
+    }
+
     public void TrainStrength()
     {
         if (energySystem.Energy > 0)
         {
-            Debug.Log("Training Strength");
-            playerInformation.Strength += trainValue;
-            playerInformation.SkillPoints += skillPointsGain;
+            Debug.Log($"Training Strength. Training Value: {TrainValue}, Skill Points Gain: {SkillPointsGain}");
+            RollRngValues();
+            playerInformation.Strength += TrainValue;
+            playerInformation.SkillPoints += SkillPointsGain;
             energySystem.Energy -= rng.Next(10, 18);
             playerInformation.UpdatePlrStats();
+            turnTimeSystem.TurnAdd();
         }
         else
         {
@@ -50,11 +62,13 @@ public class TrainingSystem : MonoBehaviour
     {
         if (energySystem.Energy > 0)
         {
-            Debug.Log("Training Vitality");
-            playerInformation.Vitality += trainValue;
-            playerInformation.SkillPoints += skillPointsGain;
+            Debug.Log($"Training Vitality. Training Value: {TrainValue}, Skill Points Gain: {SkillPointsGain}");
+            RollRngValues();
+            playerInformation.Vitality += TrainValue;
+            playerInformation.SkillPoints += SkillPointsGain;
             energySystem.Energy -= 25;
             playerInformation.UpdatePlrStats();
+            turnTimeSystem.TurnAdd();
         }
         else
         {
@@ -67,11 +81,13 @@ public class TrainingSystem : MonoBehaviour
     {
         if (energySystem.Energy > 0)
         {
-            Debug.Log("Training Dexterity");
-            playerInformation.Dexterity += trainValue;
-            playerInformation.SkillPoints += skillPointsGain;
+            Debug.Log($"Training Dexterity. Training Value: {TrainValue}, Skill Points Gain: {SkillPointsGain}");
+            RollRngValues();
+            playerInformation.Dexterity += TrainValue;
+            playerInformation.SkillPoints += SkillPointsGain;
             energySystem.Energy -= 10;
             playerInformation.UpdatePlrStats();
+            turnTimeSystem.TurnAdd();
         }
         else
         {
@@ -84,11 +100,13 @@ public class TrainingSystem : MonoBehaviour
     {
         if (energySystem.Energy > 0)
         {
-            Debug.Log("Training Agility");
-            playerInformation.Agility += trainValue;
-            playerInformation.SkillPoints += skillPointsGain;
+            Debug.Log($"Training Agility. Training Value: {TrainValue}, Skill Points Gain: {SkillPointsGain}");
+            RollRngValues();
+            playerInformation.Agility += TrainValue;
+            playerInformation.SkillPoints += SkillPointsGain;
             energySystem.Energy -= 15;
             playerInformation.UpdatePlrStats();
+            turnTimeSystem.TurnAdd();
         }
         else
         {
@@ -100,11 +118,13 @@ public class TrainingSystem : MonoBehaviour
     {
         if (energySystem.Energy > 0)
         {
-            Debug.Log("Training Intellectual");
-            playerInformation.Intellectual += trainValue;
-            playerInformation.SkillPoints += skillPointsGain;
+            Debug.Log($"Training Intellectual. Training Value: {TrainValue}, Skill Points Gain: {SkillPointsGain}");
+            RollRngValues();
+            playerInformation.Intellectual += TrainValue;
+            playerInformation.SkillPoints += SkillPointsGain;
             energySystem.Energy -= 10;
             playerInformation.UpdatePlrStats();
+            turnTimeSystem.TurnAdd();
         }
         else
         {
